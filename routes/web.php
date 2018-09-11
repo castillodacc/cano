@@ -11,9 +11,11 @@
 |
 */
 
+ 
+
 Route::get('/dashboard', ['as' => 'admim.dashboard', 'uses'=>'pageController@index']);
-
-
+ 
+ 
 Route::resource('/users', 'UsersController');
 Route::resource('/assign', 'AssignController');
 Route::resource('/events','EventsController');

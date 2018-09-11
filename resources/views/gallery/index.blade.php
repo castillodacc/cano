@@ -38,13 +38,14 @@
                 </tr>
                 </thead>
                 <tbody>
-			@foreach($gallerys AS $gallery)
+			@foreach($galleries AS $gallery)
                 <tr> 
                   <td><sup>{{ $gallery->events->name }}</sup> {{ $gallery->name }}</td> 
                   <td>De la {{ $gallery->start }} a la {{ $gallery->end  }}</td>
-                  <td>{{ (- $gallery->start + $gallery->end) + 1  }}</td> 
+                  <td>{{ $gallery->total  }}</td> 
                   <div class="text-center">
-	                  <td>
+	                  <td> 
+                      
 	                  	<a class="btn btn-primary flat btn-xs" href="{{ route('gallery.edit', $gallery->id) }}">Editar</a>
 	                  <form method="POST" action="{{ route('gallery.destroy', $gallery->id) }}">
 	                  	{{ method_field('DELETE') }}

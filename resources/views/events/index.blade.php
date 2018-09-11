@@ -32,17 +32,24 @@
                 <thead>
                 <tr>
                   <th>Nombre de evento</th>
+                  <th>Total etiquetadas</th>
                   <th>Fecha de creación</th> 
                   <th>Acción</th>
                 </tr>
                 </thead>
                 <tbody>
 			@foreach($events AS $event)
-                <tr>
-                  <td>{{ $event->name }}</td>
+                <tr>  
+      
+                  <td>{{ $event->name }}</td> 
+
+
+                  <td>@foreach($event->galleries AS $ev) {{ $ev->total }} @endforeach</td>
+                  
                   <td>{{ $event->created_at }}</td> 
                   <div class="text-center">
 	                  <td>
+                      <a class="btn btn-info flat btn-xs" href="{{ route('events.show', ['id' => $event->id]) }}">Ver</a>
 	                  	<a class="btn btn-primary flat btn-xs" href="{{ route('events.edit', ['id' => $event->id]) }}">Editar</a>
 	                  <form method="POST" action="{{ route('events.destroy', $event->id) }}">
 	                  	{{ method_field('DELETE') }}

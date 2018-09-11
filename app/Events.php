@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Events extends Model
 {
     protected $fillable = [
-    	'name',
+    	'name','total'
     ];
+
+    function galleries(){
+
+    	return $this->hasMany(Galleries::class);
+
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;  
-use App\Gallerys;
+use App\Galleries;
 use App\Events;
 
 class galleryController extends Controller
@@ -11,23 +11,23 @@ class galleryController extends Controller
      
     public function index()
     { 
-         $gallerys = Gallerys::all(); 
-         return view('gallery.index', compact('gallerys'));
+         $galleries = Galleries::all(); 
+         return view('gallery.index', compact('galleries'));
     }
 
      
     public function create()
     {
-        $gallerys = Gallerys::all();
+        $galleries = Galleries::all();
         $events = Events::all();
 
-        return view('gallery.create',compact('gallerys','events'));    
+        return view('gallery.create',compact('galleries','events'));    
     }
 
      
     public function store(Request $request)
     {
-        Gallerys::create($request->all());
+        Galleries::create($request->all());
 
         return redirect('gallery/create');
     }
@@ -42,22 +42,24 @@ class galleryController extends Controller
     public function edit($id)
     {
         $events = Events::all();
-        $gallerys = Gallerys::findOrFail($id);
-
-        return view('gallery.edit', compact('gallerys', 'events'));
+        $galleries = Galleries::findOrFail($id);
+        $start = Galleries::where('id',$id)->sum('start');
+        $end = Galleries::where('id',$id)->sum('end');
+ 
+        return view('gallery.edit', compact('galleries', 'events','start','end'));
     }
 
      
     public function update(Request $request, $id)
     {
-        Gallerys::findOrFail($id)->update($request->all());
+        Galleries::findOrFail($id)->update($request->all());
         return redirect('gallery');
     }
 
      
     public function destroy($id)
     {
-        Gallerys::findOrFail($id)->delete();
+        Galleries::findOrFail($id)->delete();
         return redirect('gallery');
     }
 }
